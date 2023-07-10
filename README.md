@@ -16,6 +16,9 @@ Finding the right includes:
 pkg-config --libs glew
 ```
 
+If you are not using wayland, make sure that `libglfw3-wayland` is not 
+installed - this can lead to errors.
+
 ## Basics
 
 Basics first; compiling something.
