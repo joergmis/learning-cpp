@@ -1,1 +1,4 @@
-hello
+main
+.cache
+*.o
+*.out

@@ -3,6 +3,18 @@
 ## Resources
 
 - [codecademy](https://www.codecademy.com/learn/c-plus-plus-for-programmers)
+- [jdaho on github](https://jdhao.github.io/2020/11/29/neovim_cpp_dev_setup/)
+- http://www.opengl-tutorial.org/beginners-tutorials/tutorial-1-opening-a-window/
+- https://www.youtube.com/watch?v=45MIykWJ-C4
+- https://learnopengl.com/Getting-started/Hello-Window
+
+## Notes
+
+Finding the right includes:
+
+```sh 
+pkg-config --libs glew
+```
 
 ## Basics
 
