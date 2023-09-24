@@ -4,20 +4,24 @@
 #include <iostream>
 #include <span>
 #include <sstream>
+#include <stdexcept>
 #include <string>
 #include <sys/types.h>
 #include <vector>
 
 typedef std::vector<uint>::size_type vec_sz;
 
-int exercise2();
-int exercise3();
-int exercise4();
+void exercise2();
+void exercise3();
+void exercise4();
 uint median(std::vector<uint> data);
 
-int main() { return exercise4(); }
+int main() {
+  exercise4();
+  return 0;
+}
 
-int exercise2() {
+void exercise2() {
   std::vector<uint> values;
 
   std::cout << "enter the unsigned integers, followed by a EOL: ";
@@ -29,8 +33,7 @@ int exercise2() {
   vec_sz size = values.size();
 
   if (size <= 3) {
-    std::cout << "not enough values, please try again" << std::endl;
-    return 1;
+    throw std::domain_error("not enough values");
   }
 
   sort(values.begin(), values.end());
@@ -50,8 +53,6 @@ int exercise2() {
   std::cout << "lower quartile: " << lower_quartile << std::endl;
   std::cout << "median: " << med << std::endl;
   std::cout << "upper quartile: " << upper_quartile << std::endl;
-
-  return 0;
 }
 
 /*
@@ -65,8 +66,7 @@ uint median(std::vector<uint> data) {
   vec_sz size = data.size();
 
   if (size < 3) {
-    std::cout << "not enough values, please try again" << std::endl;
-    return 0;
+    throw std::domain_error("not enough values, please try again");
   }
 
   const vec_sz middle = size / 2;
@@ -76,7 +76,7 @@ uint median(std::vector<uint> data) {
   return median;
 }
 
-int exercise3() {
+void exercise3() {
   std::vector<std::string> data;
   std::vector<uint> occurences;
   std::cout << "enter words on one line (and then hit enter): ";
@@ -110,11 +110,9 @@ int exercise3() {
   for (int i = 0; i != size; ++i) {
     std::cout << data[i] << ": " << occurences[i] << " occurences" << std::endl;
   }
-
-  return 0;
 }
 
-int exercise4() {
+void exercise4() {
   std::string shortest = "";
   std::string longest = "";
 
@@ -144,12 +142,9 @@ int exercise4() {
   }
 
   if (count == 0) {
-    std::cout << "error: no words found" << std::endl;
-    return 1;
+    throw std::domain_error("no words found");
   }
 
   std::cout << "shortest word: " << shortest << std::endl;
   std::cout << "longest word: " << longest << std::endl;
-
-  return 0;
 }
