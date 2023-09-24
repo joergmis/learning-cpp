@@ -1,15 +1,21 @@
 #include <algorithm>
+#include <bits/types/cookie_io_functions_t.h>
+#include <cstring>
 #include <iostream>
 #include <span>
+#include <sstream>
+#include <string>
 #include <sys/types.h>
 #include <vector>
 
 typedef std::vector<uint>::size_type vec_sz;
 
 int exercise2();
+int exercise3();
+int exercise4();
 uint median(std::vector<uint> data);
 
-int main() { return exercise2(); }
+int main() { return exercise4(); }
 
 int exercise2() {
   std::vector<uint> values;
@@ -68,4 +74,82 @@ uint median(std::vector<uint> data) {
       size % 2 == 0 ? (data[middle] + data[middle - 1]) / 2 : data[middle];
 
   return median;
+}
+
+int exercise3() {
+  std::vector<std::string> data;
+  std::vector<uint> occurences;
+  std::cout << "enter words on one line (and then hit enter): ";
+
+  std::string line;
+  std::getline(std::cin, line);
+
+  std::istringstream iss(line);
+  std::string word;
+  while (iss >> word) {
+    std::vector<std::string>::size_type size = data.size();
+    bool found = false;
+
+    for (int i = 0; i != size; ++i) {
+      if (word == data[i]) {
+        found = true;
+        ++occurences[i];
+      }
+    }
+
+    if (!found) {
+      data.push_back(word);
+      occurences.push_back(1);
+    }
+  }
+
+  std::cout << std::endl;
+  std::cout << "word summary:" << std::endl;
+
+  std::vector<std::string>::size_type size = data.size();
+  for (int i = 0; i != size; ++i) {
+    std::cout << data[i] << ": " << occurences[i] << " occurences" << std::endl;
+  }
+
+  return 0;
+}
+
+int exercise4() {
+  std::string shortest = "";
+  std::string longest = "";
+
+  std::cout << "enter some words or a phrase on a line:" << std::endl;
+
+  std::string line;
+  std::getline(std::cin, line);
+  std::istringstream iss(line);
+
+  std::string word;
+  int count = 0;
+  while (iss >> word) {
+    if (count == 0) {
+      shortest = word;
+      longest = word;
+    }
+
+    ++count;
+
+    if (word.size() > longest.size()) {
+      longest = word;
+    }
+
+    if (word.size() < shortest.size()) {
+      shortest = word;
+    }
+  }
+
+  if (count == 0) {
+    std::cout << "error: no words found" << std::endl;
+    return 1;
+  }
+
+  std::cout << "shortest word: " << shortest << std::endl;
+  std::cout << "longest word: " << longest << std::endl;
+
+  return 0;
 }
